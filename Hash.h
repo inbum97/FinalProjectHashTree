@@ -52,7 +52,6 @@ void Hash::printBuckList(int index, void visit(Armors*)) {
 //print unsorted 
 void Hash::printHash(void visit(Armors*)) {
 	for (int i = 0; i < numBucket; i++) {
-		//if (table[i].getCount() > 0) {
 			cout << "Bucket number " << i << ": ";
 			table[i].displayList(visit);
 	}
@@ -122,9 +121,9 @@ int Hash::hashFunction(string unikey) {
 	int sum = 0;
 	int len = unikey.size();
 	for (int i = 0; i < len; i++) {
-		sum += pow(unikey[i], 2);
+		sum += unikey[i];
 	}
-	int key = (19 * sum + 17) % numBucket;
+	int key = (7 * sum + 19) % numBucket;
 	return key;
 }
 
@@ -134,9 +133,10 @@ int Hash::badHashFunc(string unikey) {
 	for (int i = 0; i < len; i++) {
 		sum += unikey[i];
 	}
-	int key = sum % 25;
+	int key = sum % 4;
 	return key;
 }
+
 Hash::~Hash() {
 	for (int i = 0; i < numBucket; i++) {
 		if (table[i].getCount() > 0) {
